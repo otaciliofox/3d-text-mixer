@@ -79,6 +79,10 @@ export class SceneManager {
     this.modelGroup.add(object);
   }
 
+  getModel() {
+    return this.modelGroup;
+  }
+
   setCameraDistance(distance) {
     const isMobile = window.innerWidth <= 768;
     // On mobile, distance maps to both Y and Z to maintain angle

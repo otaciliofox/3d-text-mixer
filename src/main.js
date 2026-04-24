@@ -236,6 +236,19 @@ function setupMobileTabs() {
       sceneManager.setCameraDistance(mapped);
     });
   }
+
+  if (ui.btnExport) {
+    ui.btnExport.addEventListener('click', () => {
+      console.log('Export button clicked');
+      try {
+        exportSTL(sceneManager.getModel(), '3d-text-mixer.stl');
+      } catch (err) {
+        console.error('Export failed:', err);
+      }
+    });
+  } else {
+    console.warn('Export button (#btn-export) not found in DOM');
+  }
 }
 
 setupMobileTabs();
