@@ -87,7 +87,8 @@
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    padding: 0 !important;
+    /* restore vertical padding on mobile; increase bottom space and account for safe-area inset */
+    padding: 1rem 1rem calc(2.25rem + env(safe-area-inset-bottom)) 1rem !important;
     margin: 0 !important;
   }
 }
