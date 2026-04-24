@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Text Mixer - Printable Designs</title>
+    <!-- Google Fonts for UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/styles/main.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="sidebar">
+        <div class="header">
+          <h1>3D Text Mixer</h1>
+          <p>Professional STL Generator</p>
+        </div>
+
+        <div class="controls-container">
+          <details class="control-group accordion active" id="bg-section">
+            <summary>
+              <h2>Background (Block)</h2>
+              <span class="icon">▼</span>
+            </summary>
+            <div class="accordion-content">
+              <label>Text</label>
+              <input type="text" id="bg-text" value="MOM">
+              
+              <label>Font (Google Fonts)</label>
+              <div class="custom-select-wrapper" id="bg-font-wrapper">
+                <div class="custom-select-trigger" id="bg-font-trigger"><span>Anton</span> <span class="icon">▼</span></div>
+                <div class="custom-options-container hidden" id="bg-font-dropdown">
+                  <input type="text" class="custom-search" id="bg-font-search" placeholder="Search fonts...">
+                  <div class="custom-options" id="bg-font-options"></div>
+                </div>
+              </div>
+              
+              <label>Size</label>
+              <div class="slider-group">
+                <input type="range" id="bg-size" min="20" max="200" value="100">
+                <input type="number" id="bg-size-num" min="20" max="200" value="100">
+              </div>
+              
+              <label>Letter Spacing</label>
+              <div class="slider-group">
+                <input type="range" id="bg-spacing" min="-20" max="50" value="0">
+                <input type="number" id="bg-spacing-num" min="-20" max="50" value="0">
+              </div>
+              
+              <label>Thickness</label>
+              <div class="slider-group">
+                <input type="range" id="bg-depth" min="5" max="30" value="15">
+                <input type="number" id="bg-depth-num" min="5" max="30" value="15">
+              </div>
+            </div>
+          </details>
+          
+          <details class="control-group accordion" id="base-section">
+            <summary>
+              <h2>Base Options</h2>
+              <span class="icon">▼</span>
+            </summary>
+            <div class="accordion-content">
+              <label>Base Connection</label>
+              <select id="bg-base">
+                <option value="none">None</option>
+                <option value="underline">Bottom Bar (Stand)</option>
+                <option value="plate">Backing Plate</option>
+              </select>
+              
+              <div id="base-settings" style="display: none; flex-direction: column; gap: 12px; margin-top: 12px;">
+                <label>Padding / Height Extension</label>
+                <div class="slider-group">
+                  <input type="range" id="base-padding" min="0" max="100" value="10">
+                  <input type="number" id="base-padding-num" min="0" max="100" value="10">
+                </div>
+                
+                <label>Base Depth (Thickness / Footprint)</label>
+                <div class="slider-group">
+                  <input type="range" id="base-depth" min="2" max="100" value="15">
+                  <input type="number" id="base-depth-num" min="2" max="100" value="15">
+                </div>
+                
+                <label>Y Offset (Move Up/Down)</label>
+                <div class="slider-group">
+                  <input type="range" id="base-offset-y" min="-50" max="50" value="0">
+                  <input type="number" id="base-offset-y-num" min="-50" max="50" value="0">
+                </div>
+                
+                <label>Z Offset (Move Front/Back)</label>
+                <div class="slider-group">
+                  <input type="range" id="base-offset-z" min="-100" max="100" value="0">
+                  <input type="number" id="base-offset-z-num" min="-100" max="100" value="0">
+                </div>
+              </div>
+            </div>
+          </details>
+          
+          <details class="control-group accordion" id="fg-section">
+            <summary>
+              <h2>Foreground (Cursive)</h2>
+              <span class="icon">▼</span>
+            </summary>
+            <div class="accordion-content">
+              <label>Text</label>
+              <input type="text" id="fg-text" value="I love you">
+              
+              <label>Font (Google Fonts)</label>
+              <div class="custom-select-wrapper" id="fg-font-wrapper">
+                <div class="custom-select-trigger" id="fg-font-trigger"><span>Pacifico</span> <span class="icon">▼</span></div>
+                <div class="custom-options-container hidden" id="fg-font-dropdown">
+                  <input type="text" class="custom-search" id="fg-font-search" placeholder="Search fonts...">
+                  <div class="custom-options" id="fg-font-options"></div>
+                </div>
+              </div>
+              
+              <label>Size</label>
+              <div class="slider-group">
+                <input type="range" id="fg-size" min="10" max="150" value="35">
+                <input type="number" id="fg-size-num" min="10" max="150" value="35">
+              </div>
+              
+              <label>Letter Spacing</label>
+              <div class="slider-group">
+                <input type="range" id="fg-spacing" min="-20" max="50" value="0">
+                <input type="number" id="fg-spacing-num" min="-20" max="50" value="0">
+              </div>
+
+              <label>Thickness</label>
+              <div class="slider-group">
+                <input type="range" id="fg-depth" min="2" max="15" value="5">
+                <input type="number" id="fg-depth-num" min="2" max="15" value="5">
+              </div>
+              
+              <label>X Offset</label>
+              <div class="slider-group">
+                <input type="range" id="fg-offset-x" min="-100" max="100" value="0">
+                <input type="number" id="fg-offset-x-num" min="-100" max="100" value="0">
+              </div>
+              
+              <label>Y Offset</label>
+              <div class="slider-group">
+                <input type="range" id="fg-offset-y" min="-100" max="100" value="0">
+                <input type="number" id="fg-offset-y-num" min="-100" max="100" value="0">
+              </div>
+            </div>
+          </details>
+          
+          <details class="control-group accordion" id="deco-section">
+            <summary>
+              <h2>Decorations</h2>
+              <span class="icon">▼</span>
+            </summary>
+            <div class="accordion-content">
+              <label>Shape</label>
+              <select id="deco-shape">
+                <option value="none">None</option>
+                <option value="heart">Heart</option>
+                <option value="star">Star</option>
+                <option value="circle">Circle</option>
+                <option value="diamond">Diamond</option>
+                <option value="crown">Crown</option>
+              </select>
+              
+              <div id="deco-settings" style="display: none; flex-direction: column; gap: 12px; margin-top: 12px;">
+                <label>Size</label>
+                <div class="slider-group">
+                  <input type="range" id="deco-size" min="10" max="100" value="30">
+                  <input type="number" id="deco-size-num" min="10" max="100" value="30">
+                </div>
+                
+                <label>X Offset</label>
+                <div class="slider-group">
+                  <input type="range" id="deco-offset-x" min="-200" max="200" value="0">
+                  <input type="number" id="deco-offset-x-num" min="-200" max="200" value="0">
+                </div>
+                
+                <label>Y Offset</label>
+                <div class="slider-group">
+                  <input type="range" id="deco-offset-y" min="-100" max="100" value="0">
+                  <input type="number" id="deco-offset-y-num" min="-100" max="100" value="0">
+                </div>
+              </div>
+            </div>
+          </details>
+          
+          <details class="control-group accordion" id="optim-section">
+            <summary>
+              <h2>Print Optimizations</h2>
+              <span class="icon">▼</span>
+            </summary>
+            <div class="accordion-content">
+              <label>Accents/Dots Sink (Overlap)</label>
+              <div class="slider-group">
+                <input type="range" id="accent-offset" min="-10" max="50" value="2">
+                <input type="number" id="accent-offset-num" min="-10" max="50" value="2">
+              </div>
+            </div>
+          </details>
+
+          <div class="control-group export-area" id="export-section">
+            <button id="btn-export" class="primary-button">
+              <span>Export STL</span>
+              <span class="icon">⬇️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Navigation at bottom -->
+        <nav class="mobile-tabs">
+          <button class="tab-btn active" data-tab="bg-section" title="Background">
+            <span class="tab-icon">🔠</span>
+            <span class="tab-label">Back</span>
+          </button>
+          <button class="tab-btn" data-tab="fg-section" title="Foreground">
+            <span class="tab-icon">✍️</span>
+            <span class="tab-label">Front</span>
+          </button>
+          <button class="tab-btn" data-tab="base-section" title="Base">
+            <span class="tab-icon">📏</span>
+            <span class="tab-label">Base</span>
+          </button>
+          <button class="tab-btn" data-tab="deco-section" title="Decorations">
+            <span class="tab-icon">✨</span>
+            <span class="tab-label">Deco</span>
+          </button>
+          <button class="tab-btn" data-tab="optim-section" title="Optimize">
+            <span class="tab-icon">⚙️</span>
+            <span class="tab-label">Fix</span>
+          </button>
+          <button class="tab-btn" data-tab="export-section" title="Export">
+            <span class="tab-icon">💾</span>
+            <span class="tab-label">Save</span>
+          </button>
+        </nav>
+      </div>
+      
+      <div class="preview-container">
+        <div id="canvas-container"></div>
+        
+        <!-- Floating Vertical Zoom Slider -->
+        <div class="zoom-control-wrapper">
+          <span class="zoom-icon">➕</span>
+          <input type="range" id="mobile-zoom" min="50" max="600" value="320" step="1">
+          <span class="zoom-icon">➖</span>
+        </div>
+
+        <div id="loading" class="hidden">Loading Fonts & Generating Model...</div>
+      </div>
+    </div>
+    
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
