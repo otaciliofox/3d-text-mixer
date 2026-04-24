@@ -225,9 +225,15 @@ function setupMobileTabs() {
   // Zoom Slider Connection
   const zoomSlider = document.getElementById('mobile-zoom');
   if (zoomSlider) {
+    // Invert slider mapping so that decreasing the slider value moves the camera
+    // further away (reduces apparent text size). This matches user expectation
+    // that "zoom down" should make the scene appear smaller.
     zoomSlider.addEventListener('input', (e) => {
-      const distance = parseInt(e.target.value);
-      sceneManager.setCameraDistance(distance);
+      const raw = parseInt(e.target.value, 10);
+      const min = parseInt(zoomSlider.min, 10) || 50;
+      const max = parseInt(zoomSlider.max, 10) || 600;
+      const mapped = max + min - raw; // invert within same range
+      sceneManager.setCameraDistance(mapped);
     });
   }
 }
