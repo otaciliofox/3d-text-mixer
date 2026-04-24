@@ -71,25 +71,32 @@
     padding-top: 1rem !important;
   }
 
-  /* Flatten EVERYTHING */
-  details.accordion, 
+  /* Keep normal layout boxes for accessibility; visually hide summary text/icons instead
+     of using `display: contents`, which can break accessibility and focus order. */
+  details.accordion,
   details.accordion summary,
   .control-group summary {
-    display: contents !important; /* Elements don't generate a box */
+    display: block;
   }
 
+  /* Visually hide headings/icons but keep them in the accessibility tree */
   .control-group h2,
   .control-group .icon {
-    display: none !important; /* Truly hide summary content */
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
-  .accordion-content {
+  /* Specific rule for active mobile accordion content to avoid !important overrides
+     and keep predictable specificity. */
+  .controls-container > .control-group.active details.accordion .accordion-content {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    /* restore vertical padding on mobile; increase bottom space and account for safe-area inset */
-    padding: 1rem 1rem calc(2.25rem + env(safe-area-inset-bottom)) 1rem !important;
-    margin: 0 !important;
+    padding: 1rem 1rem calc(2.25rem + env(safe-area-inset-bottom)) 1rem;
+    margin: 0;
   }
 }
 
